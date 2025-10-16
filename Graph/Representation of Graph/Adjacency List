@@ -1,0 +1,29 @@
+import java.util.*;
+class Main {
+    public static void main(String[] args) {
+       Scanner sc=new Scanner(System.in);
+       int n=sc.nextInt(); //vertices
+       int m=sc.nextInt();  //edges
+       ArrayList<ArrayList<Integer>> arr=new ArrayList<>();
+       for(int i=0;i<n;i++){
+           arr.add(new ArrayList<>());
+       }
+       for(int k=0;k<m;k++){
+           int i=sc.nextInt();
+           int j=sc.nextInt();
+           addEdge(arr,i,j);   //connect two nodes
+       }
+      //display adjacency list
+       for(int i=0;i<arr.size();i++){
+           System.out.print(i+": ");
+           for(int j=0;j<arr.get(i).size();j++){
+               System.out.print(arr.get(i).get(j)+" ");
+           }
+           System.out.println();
+       }
+    }
+    public static void addEdge(ArrayList<ArrayList<Integer>> arr,int i,int j){
+        arr.get(i).add(j);
+        arr.get(j).add(i);
+    }
+}
