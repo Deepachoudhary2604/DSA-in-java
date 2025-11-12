@@ -1,0 +1,18 @@
+class Solution {
+    public int countSubsequenceWithTargetSum(int[] nums, int k) {
+        return helper(nums,k,0,0);
+    }
+    public int helper(int[] nums,int k,int sum,int idx){
+        if(idx==nums.length){
+            if(sum==k){
+                return 1;
+            }
+            else{
+                return 0;
+            }
+        }
+        int pick=helper(nums,k,sum+nums[idx],idx+1);
+        int notpick=helper(nums,k,sum,idx+1);
+        return pick+notpick;
+    }
+}
