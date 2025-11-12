@@ -1,0 +1,18 @@
+class Solution {
+    public boolean checkSubsequenceSum(int[] nums, int k) {
+        return helper(nums,k,0,0);
+    }
+    public boolean helper(int[] nums,int k,int sum,int idx){
+        if(idx==nums.length){
+            if(sum==k){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        boolean pick=helper(nums,k,sum+nums[idx],idx+1);
+        boolean notpick=helper(nums,k,sum,idx+1);
+        return pick || notpick;
+    }
+}
