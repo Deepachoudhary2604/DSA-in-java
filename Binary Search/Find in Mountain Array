@@ -1,0 +1,73 @@
+/**
+ * // This is MountainArray's API interface.
+ * // You should not implement it, or speculate about its implementation
+ * interface MountainArray {
+ *     public int get(int index) {}
+ *     public int length() {}
+ * }
+ */
+ 
+class Solution {
+    public int findInMountainArray(int target, MountainArray mountainArr) {
+        int n=mountainArr.length();
+        int p=peak(mountainArr);
+        if(mountainArr.get(p)==target){
+            return p;
+        }
+        int ans1=BS(mountainArr,target,0,p-1);
+        if(ans1!=-1){
+            return ans1;
+        }
+        return OBS(mountainArr,target,p+1,n-1);
+        
+    }
+    public int peak(MountainArray mountainArr){
+        int s=0;
+        int e=mountainArr.length()-1;
+        int ans=-1;
+        while(s<e){
+            int mid=s+(e-s)/2;
+            if(mountainArr.get(mid)>mountainArr.get(mid+1)){
+                e=mid;
+                ans=mid;
+            }
+            else{
+                s=mid+1;
+                ans=mid+1;
+            }
+        }
+        return ans;
+    }
+    public int BS(MountainArray mountainArr,int target,int s,int e){
+        
+        while(s<=e){
+            int mid=s+(e-s)/2;
+            if(mountainArr.get(mid)==target){
+                return mid;
+            }
+            else if(mountainArr.get(mid)>target){
+                e=mid-1;
+            }
+            else{
+                s=mid+1;
+            }
+        }
+        return -1;
+    }
+    public int OBS(MountainArray mountainArr,int target,int s,int e){
+        while(s<=e){
+            int mid=s+(e-s)/2;
+            if(mountainArr.get(mid)==target){
+                return mid;
+            }
+            else if(mountainArr.get(mid)>target){
+                s=mid+1;
+            }
+            else{
+                e=mid-1;
+            }
+        }
+        return -1;
+    }
+
+}
